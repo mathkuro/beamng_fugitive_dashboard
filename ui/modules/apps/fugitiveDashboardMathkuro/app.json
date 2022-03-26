@@ -1,0 +1,15 @@
+{
+    "name" : "Fugitive Dashboard",
+    "author": "ますくろ",
+    "version": "0.2",
+    "description": "追跡状況を表示するApp。Traffic(Police)を出している時のみ動作。",
+    "directive": "fugitiveDashboardMathkuro",
+    "domElement": "<fugitive-dashboard-mathkuro></fugitive-dashboard-mathkuro>",
+    "css": {
+      "width": "30%",
+      "height": "auto",
+      "bottom": "0px",
+      "left": "35%"
+    },
+    "preserveAspectRatio": true
+  }
