@@ -51,11 +51,14 @@ angular.module('beamng.apps')
       const DEFAULT_LANG = 'en';
       const SUPPORT_LANGS = ['en', 'ja'];
 
-      // 追跡情報：バウンティ・車両衝突回数・違反回数・追跡時間・ロードブロック設置回数
-      const RESULT_COLS = ['pursuitTime', 'bounty', 'hitCount', 'offensesCount', 'roadblocks'];
+      // 追跡情報：バウンティ・車両衝突回数・違反回数・追跡時間・ロードブロック設置回数・被害総額[$]
+      const RESULT_COLS = ['pursuitTime', 'bounty', 'hitCount', 'offensesCount', 'roadblocks', 'totalDamage'];
 
       // BeamNG.driveの実装上のヒートレベルは最高3まで。(v0.23時点)
       const MAX_HEAT_LEVEL = 3;
+
+      // ダメージ値を被害額ベースに換算するための値。試行してみた感じだと10万くらいがちょうどよさそう。
+      const DAMAGE_TO_VALUE = 100000;
 
       // リアルタイムの追跡情報用の変数を初期化。リアルタイムの値を格納するものなので初期値は全て0。
       var currentResult = {};
@@ -65,6 +68,7 @@ angular.module('beamng.apps')
       var lastHeatlevel = 0;
       var lastRoadblockState = 0;
       var roadblocks = 0;
+      let damages = {};
 
       // 追跡情報を処理するためのクラス。クラス化するほどのものではなかったかも。
       class Result {
@@ -107,6 +111,7 @@ angular.module('beamng.apps')
         data.offensesCount = data.offensesCount.toLocaleString(undefined, {maximumFractionDigits: 0});
         data.bounty = data.bounty.toLocaleString(undefined, {maximumFractionDigits: 0});
         data.roadblocks = data.roadblocks.toLocaleString(undefined, {maximumFractionDigits: 0});
+        data.totalDamage = data.totalDamage.toLocaleString(undefined, {maximumFractionDigits: 0});
         return data;
       }
 
@@ -188,8 +193,15 @@ angular.module('beamng.apps')
             var result = {lang:langName, last:currentResult, best:bestResult.data, total:totalResult.data};
             // v0.23の更新でファイル書き込みを行うとUIが更新される機能が追加されたので逮捕判定期間ずらして書き込みを行い、UIの醜さを最小限に抑える苦肉の策
             setTimeout(
-              function() {bngApi.engineLua('jsonWriteFile(' + bngApi.serializeToLua(SETTINGS_PATH) + ', ' + bngApi.serializeToLua(result) + ', ' + bngApi.serializeToLua(true) + ')');},
-              4700);
+              function() {
+                bngApi.engineLua('jsonWriteFile(' + bngApi.serializeToLua(SETTINGS_PATH) + ', ' + bngApi.serializeToLua(result) + ', ' + bngApi.serializeToLua(true) + ')');
+
+                // ファイルへの反映が完了したタイミングで初期化しておく
+                for (const col of RESULT_COLS) {
+                  currentResult[col] = 0;
+                }
+              }, 4700);
+
           })
 
           roadblocks = 0;
@@ -208,6 +220,25 @@ angular.module('beamng.apps')
             bngApi.engineLua('extensions.gameplay_traffic.getPursuitData()', (pursuitData) => {
               if (pursuitData) {draw(svg, pursuitData, langName);}
             });
+
+            // 被害総額算出。プレイヤー車両以外の全ての車両のダメージ/係数*車両価格を総計して算出
+            // プレイヤーが関わらないダメージ(スポーン時のダメージ等)も含まれる
+            bngApi.engineLua('gameplay_traffic.getTrafficData()', (trafficData) => {
+              for (const vid in trafficData) {
+                bngApi.engineLua('core_vehicles.getVehicleDetails(' + bngApi.serializeToLua(vid) + ').configs.Value', (value) => {
+                  let _tmp_damage = (trafficData[vid]['damage'] / DAMAGE_TO_VALUE) * value;
+                  if (vid in damages && _tmp_damage >= damages[vid]) {
+                    currentResult.totalDamage += (_tmp_damage - damages[vid]);
+                    damages[vid] = _tmp_damage;
+                  } else {
+                    currentResult.totalDamage += _tmp_damage;
+                    damages[vid] = _tmp_damage;
+                  }
+                });
+              }
+              svg.getElementById('totalDamage').textContent = currentResult.totalDamage.toLocaleString(undefined, { maximumFractionDigits: 0 });
+            });
+
           });
         });
       });
@@ -281,6 +312,7 @@ angular.module('beamng.apps')
         hitCount = 'HIT COUNT';
         offensesCount = 'OFFENSES COUNT';
         roadblocks = 'ROADBLOCKS';
+        totalDamage = 'TOTAL DAMAGE[$]';
 
         offenses = {speeding: 'Speeding', racing: 'Racing',
                     hitPolice: 'Hit(Police)', hitTraffic: 'Hit(Traffic)',
@@ -301,6 +333,7 @@ angular.module('beamng.apps')
         hitCount = '車両被害台数';
         offensesCount = '違反回数';
         roadblocks = 'ロードブロック';
+        totalDamage = '被害総額[$]';
 
         offenses = {speeding: '速度超過', racing: '速度超過[重度]',
                     hitPolice: '公務執行妨害', hitTraffic: '当て逃げ',

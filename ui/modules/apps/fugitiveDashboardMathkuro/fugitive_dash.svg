@@ -23,14 +23,14 @@
      inkscape:pagecheckerboard="true"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="1.0482005"
-     inkscape:cx="484.6401"
-     inkscape:cy="7.1551197"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
+     inkscape:zoom="4.192802"
+     inkscape:cx="526.61681"
+     inkscape:cy="148.23023"
+     inkscape:window-width="1971"
+     inkscape:window-height="1111"
+     inkscape:window-x="1837"
+     inkscape:window-y="911"
+     inkscape:window-maximized="0"
      inkscape:current-layer="layer1"
      fit-margin-top="0"
      fit-margin-left="0"
@@ -63,6 +63,18 @@
        height="51.355797"
        x="2.5076935"
        y="120.50785" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:10.5833px;line-height:1.25;font-family:'Yu Gothic';-inkscape-font-specification:'Yu Gothic, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="146.08183"
+       y="162.01477"
+       id="totalDamage"
+       inkscape:label="#totalDamage"><tspan
+         sodipodi:role="line"
+         id="tspan10372-8"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:10.5833px;font-family:'Yu Gothic';-inkscape-font-specification:'Yu Gothic, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;stroke-width:0.264583"
+         x="146.08183"
+         y="162.01477">0</tspan></text>
     <rect
        style="fill:#00ff00;fill-rule:evenodd;stroke-width:0.321269"
        id="evade-limit"
@@ -319,5 +331,35 @@
          style="font-style:normal;font-variant:normal;font-weight:600;font-stretch:normal;font-size:6.00000017px;font-family:'Yu Mincho';-inkscape-font-specification:'Yu Mincho, Semi-Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;stroke-width:0.264583"
          x="100"
          y="169.46312" /></text>
+    <path
+       sodipodi:type="star"
+       style="fill:#ffff00;fill-opacity:0.36385;stroke:#000000;stroke-width:3.77953;stroke-opacity:1"
+       id="path5678"
+       inkscape:flatsided="true"
+       sodipodi:sides="5"
+       sodipodi:cx="477.00797"
+       sodipodi:cy="126.88412"
+       sodipodi:r1="52.816654"
+       sodipodi:r2="42.729568"
+       sodipodi:arg1="-0.26179939"
+       sodipodi:arg2="0.36651914"
+       inkscape:rounded="0"
+       inkscape:randomized="0"
+       d="m 528.02494,113.21416 -22.25096,57.96573 -62.00461,-3.24952 -16.07,-59.97405 52.07281,-33.816474 z"
+       transform="matrix(0.11851318,-0.00527551,0.00536188,0.12045351,77.755788,144.98797)"
+       inkscape:transform-center-x="-0.013838187"
+       inkscape:transform-center-y="-0.59199224" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:8.66018px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.216505"
+       x="118.06821"
+       y="178.77165"
+       id="text9864"
+       transform="scale(1.1170677,0.89520089)"><tspan
+         sodipodi:role="line"
+         id="tspan9862"
+         style="stroke-width:0.216505"
+         x="118.06821"
+         y="178.77165">$</tspan></text>
   </g>
 </svg>

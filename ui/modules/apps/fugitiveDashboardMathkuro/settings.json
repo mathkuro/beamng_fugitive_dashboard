@@ -4,14 +4,16 @@
     "hitCount":0,
     "offensesCount":0,
     "pursuitTime":0,
-    "roadblocks":0
+    "roadblocks":0,
+    "totalDamage":0
   },
   "best":{
     "bounty":0,
     "hitCount":0,
     "offensesCount":0,
     "pursuitTime":0,
-    "roadblocks":0
+    "roadblocks":0,
+    "totalDamage":0
   },
   "lang":"en",
   "last":{
@@ -19,6 +21,7 @@
     "hitCount":0,
     "offensesCount":0,
     "pursuitTime":0,
-    "roadblocks":0
+    "roadblocks":0,
+    "totalDamage":0
   }
 }
