@@ -284,7 +284,8 @@ angular.module('beamng.apps')
 
         offenses = {speeding: 'Speeding', racing: 'Racing',
                     hitPolice: 'Hit(Police)', hitTraffic: 'Hit(Traffic)',
-                    reckless: 'Reckless', wrongWay: 'Wrong Way'}
+                    reckless: 'Reckless', intersection: 'Intersection',
+                    wrongWay: 'Wrong Way'}
       };
       
       class EnLang extends BaseLang {};
@@ -303,7 +304,8 @@ angular.module('beamng.apps')
 
         offenses = {speeding: '速度超過', racing: '速度超過[重度]',
                     hitPolice: '公務執行妨害', hitTraffic: '当て逃げ',
-                    reckless: '危険運転', wrongWay: '逆走'}
+                    reckless: '危険運転', intersection: '信号無視',
+                    wrongWay: '逆走'}
       };
     }
   };
